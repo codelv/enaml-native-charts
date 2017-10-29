@@ -40,7 +40,7 @@ setup(
     url="",
     description="enaml-native-charts package for enaml-native-cli",
     long_description=open("README.md").read(),
-    data_files=find_data_files("enaml-native-charts", ['android', 'ios', 'src']),
+    data_files=find_data_files("enaml-native-charts", 'android', 'ios', 'src'),
     install_requires=['enaml-native-cli'],
     entry_points={
         'p4a_recipe': [
