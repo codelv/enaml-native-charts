@@ -21,10 +21,10 @@ setup(
     url="",
     entry_points={
         'enaml_native_widgets': [
-            'install = charts.widgets.api:install'
+            'enaml-native-charts = charts.widgets.api:install'
         ],
         'enaml_native_android_factories': [
-            'install = charts.android.factories:install'
+            'enaml-native-charts = charts.android.factories:install'
         ],
     },
     description="enaml-native-charts package for enaml-native",

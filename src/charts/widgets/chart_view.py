@@ -17,7 +17,7 @@ from atom.api import (
 from enaml.core.declarative import d_
 from enaml.widgets.toolkit_object import ToolkitObject, ProxyToolkitObject
 
-from .view_group import ViewGroup, ProxyViewGroup
+from enamlnative.widgets.view_group import ViewGroup, ProxyViewGroup
 
 
 class ProxyChartView(ProxyViewGroup):

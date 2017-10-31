@@ -15,11 +15,11 @@ from enamlnative.widgets.chart_view import (
     ProxyChartView, ProxyLineChart, ProxyDataSet, ProxyBarChart, ProxyPieChart, ProxyScatterChart
 )
 
-from .android_toolkit_object import AndroidToolkitObject
-from .android_view_group import AndroidViewGroup, ViewGroup
-from .android_utils import ArrayList
-from .bridge import JavaBridgeObject, JavaMethod, JavaField
-from . import bridge
+from enamlnative.android.android_toolkit_object import AndroidToolkitObject
+from enamlnative.android.android_view_group import AndroidViewGroup, ViewGroup
+from enamlnative.android.android_utils import ArrayList
+from enamlnative.android.bridge import JavaBridgeObject, JavaMethod, JavaField
+from enamlnative.android import bridge
 
 
 class ChartView(ViewGroup):
