@@ -40,7 +40,7 @@ def find_data_files(dest, *folders):
 
 setup(
     name="enaml-native-charts",
-    version="1.0",
+    version="1.0.1",
     author="jrm",
     author_email="",
     license='MIT',

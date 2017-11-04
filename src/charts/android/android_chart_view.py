@@ -11,7 +11,7 @@ Created on May 20, 2017
 '''
 from atom.api import Typed, List, Instance, Subclass, set_default
 
-from enamlnative.widgets.chart_view import (
+from charts.widgets.chart_view import (
     ProxyChartView, ProxyLineChart, ProxyDataSet, ProxyBarChart, ProxyPieChart, ProxyScatterChart
 )
 
