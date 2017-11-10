@@ -9,7 +9,7 @@ Created on May 20, 2017
 
 @author: jrm
 '''
-from atom.api import Typed, List, Instance, Subclass, set_default
+from atom.api import Typed, List, Instance, Subclass, Bool, set_default
 
 from charts.widgets.chart_view import (
     ProxyChartView, ProxyLineChart, ProxyDataSet, ProxyBarChart, ProxyPieChart, ProxyScatterChart
@@ -100,7 +100,10 @@ class ChartData(JavaBridgeObject):
 class DataSet(JavaBridgeObject):
     __nativeclass__ = set_default('com.github.mikephil.charting.data.DataSet')
     setColor = JavaMethod('android.graphics.Color')
+    setColors = JavaMethod('[Landroid.graphics.Color;')  # It's a list?
     setValueTextColor = JavaMethod('android.graphics.Color')
+    setDrawIcons = JavaMethod('boolean')
+    setDrawCircles = JavaMethod('boolean')
 
 
 #: =================================================================
@@ -333,6 +336,7 @@ class AndroidLineChart(AndroidChartView, ProxyLineChart):
         """ Configure the data set for this child"""
         d = data_set.declaration
         data_set.data_set = LineDataSet(data_set.data, d.text)
+        data_set.data_set.setDrawCircles(False) #: Turn off the circles
 
     def refresh_data_set(self):
         self.chart_data = LineData([bridge.encode(c.data_set) for c in self.data_sets()])
@@ -453,13 +457,17 @@ class AndroidDataSet(AndroidToolkitObject, ProxyDataSet):
             self.set_data(d.data)
 
         #: Let the parent choose the type
-        self.parent().make_data_set(self)
+        chart = self.parent()
+        chart.make_data_set(self)
 
         #: Now update the data set
-        if d.color:
-            self.set_color(d.color)
+        if d.colors:
+            self.set_colors(d.colors)
         if d.text_color:
             self.set_text_color(d.text_color)
+        #: Text is set when the data set is created
+        if d.show_icons is not None:
+            self.set_show_icons(d.show_icons)
 
     # --------------------------------------------------------------------------
     # DataSet API
@@ -471,11 +479,17 @@ class AndroidDataSet(AndroidToolkitObject, ProxyDataSet):
         self.data.handle_change(change)
         self.parent().handle_data_set_change(change)
 
-    def set_color(self, color):
-        self.data_set.setColor(color)
+    def set_colors(self, colors):
+        if isinstance(colors, list):
+            self.data_set.setColors(colors)
+        else:
+            self.data_set.setColor(colors)
 
     def set_text(self, text):
         self.data_set.setLabel(text)
 
     def set_text_color(self, color):
         self.data_set.setValueTextColor(color)
+
+    def set_show_icons(self, show):
+        self.data_set.setDrawIcons(show)

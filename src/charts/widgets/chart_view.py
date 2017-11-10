@@ -10,7 +10,7 @@ Created on Oct 23, 2017
 @author: jrm
 '''
 from atom.api import (
-    Typed, ForwardTyped, ContainerList, Unicode,
+    Typed, ForwardTyped, ContainerList, Unicode, Instance, Enum,
     Tuple, Float, Int, Bool, observe, set_default
 )
 
@@ -94,13 +94,19 @@ class ProxyDataSet(ProxyToolkitObject):
     def update_data(self, change):
         raise NotImplementedError
 
-    def set_color(self, color):
+    def set_colors(self, colors):
         raise NotImplementedError
 
     def set_text(self, text):
         raise NotImplementedError
 
     def set_text_color(self, color):
+        raise NotImplementedError
+
+    def set_icons(self, icons):
+        raise NotImplementedError
+
+    def set_show_icons(self, show):
         raise NotImplementedError
 
 
@@ -168,8 +174,8 @@ class DataSet(ToolkitObject):
     #: Data this chart displays
     data = d_(ContainerList())
 
-    #: Series color
-    color = d_(Unicode())
+    #: Series color(s)
+    colors = d_(Instance((list, basestring)))
 
     #: Label text
     text = d_(Unicode())
@@ -177,7 +183,13 @@ class DataSet(ToolkitObject):
     #: Label color
     text_color = d_(Unicode())
 
-    @observe('data')
+    #: Icon resource
+    icons = d_(Unicode())
+
+    #: Show icons, None is default
+    show_icons = d_(Enum(None, False, True))
+
+    @observe('data', 'colors', 'text', 'text_color', 'icons', 'show_icons')
     def _update_proxy(self, change):
         """ An observer which sends the state change to the proxy.
 
