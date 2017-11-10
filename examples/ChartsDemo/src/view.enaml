@@ -1,0 +1,90 @@
+import numpy as np
+import random
+
+from atom.api import *
+from enamlnative.core.api import *
+from enamlnative.widgets.api import *
+from enamlnative.android.app import AndroidApplication
+from charts.widgets.api import *
+#AndroidApplication.instance().debug = False
+
+enamldef ChartPage(Flexbox): view:
+    flex_direction = "column"
+    padding = (10,10,10,10)
+    attr title = ""
+    Toolbar:
+        title = view.title
+        layout_height = "80"
+
+class State(Atom):
+    _instance = None
+    page = Int()
+
+    @classmethod
+    def instance(cls):
+        if cls._instance is None:
+            cls._instance = cls()
+        return cls._instance
+
+enamldef ContentView(Flexbox):
+    flex_direction = "column"
+    attr state = State.instance()
+    ViewPager:
+        current_index := state.page
+        PagerFragment:
+            ChartPage:
+                title = "Bars"
+                BarChart:
+                    Looper:
+                        iterable << [(i,random.randint(i,100)/2.0) for i in range(10)]
+                        DataSet:
+                            data = [loop_item]
+                            text = "User {}".format(loop_index)
+                            colors = "#35f1{}0".format(loop_index)
+        PagerFragment:
+            ChartPage:
+                title = "Stacked bars"
+                BarChart:
+                    DataSet:
+                        data = [(i,random.randint(i,100)/2.0) for i in range(10)]
+                        text = "Users"
+                    DataSet:
+                        data = [(i,random.randint(i,100)/2.0) for i in range(10)]
+                        text = "Awesome Users"
+                        colors = "#0FF"
+        PagerFragment:
+            ChartPage:
+                title = "Line chart"
+                LineChart:
+                    attr fs = 1000
+                    attr f = 5
+                    attr sample = 1000
+                    DataSet:
+                        data = [(x, np.sin(2*np.pi*f*x/fs)) for x in np.arange(sample)]
+                        text << "F = {}".format(f)
+                        colors = "#FF0"
+                        show_icons = False
+                    DataSet:
+                        data = [(x, np.sin(2*np.pi*2*f*x/fs)) for x in np.arange(sample)]
+                        text << "F = {}".format(2*f)
+                        colors = "#0FF"
+                        show_icons = False
+        PagerFragment:
+            ChartPage:
+                title = "Scatter plot"
+                ScatterChart:
+                    DataSet:
+                        data = [(i,random.randint(i,i+50)/2.0) for i in range(100)]
+                        text = "Old Sales"
+                        colors = "#F00"
+                    DataSet:
+                        data = [(i,random.randint(i,i+100)) for i in range(100)]
+                        text = "New Sales"
+                        colors = "#00F"
+        PagerFragment:
+            ChartPage:
+                PieChart:
+                    DataSet:
+                        data = [(0.1,"Car"), (0.3,"Truck"), (0.1,"Boat"), (0.5,"Motorcycle")]
+                        text = "Awesomeness"
+                        colors = ["#F00", "#0F0", "#00F", "#0FF"]

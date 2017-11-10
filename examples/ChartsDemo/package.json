@@ -1,0 +1,45 @@
+{
+    "cli_root": "/home/jrm/.local/packages/enaml-native-cli", 
+    "name": "ChartsDemo", 
+    "ios": {
+        "project": "demo", 
+        "arches": [
+            "x86_64", 
+            "i386", 
+            "armv7", 
+            "arm64"
+        ], 
+        "dependencies": {
+            "python": "2.7.13", 
+            "openssl": "1.0.2l", 
+            "ply": "==3.10"
+        }, 
+        "p4i": "/home/jrm/.local/packages/enaml-native-cli/python-for-ios", 
+        "excluded": []
+    }, 
+    "private": true, 
+    "sources": [
+        "src"
+    ], 
+    "version": "1.0", 
+    "bundle_id": "com.codelv.enamlnative.charts", 
+    "android": {
+        "ndk": "/home/jrm/Android/Crystax/crystax-ndk-10.3.2", 
+        "p4a": "/home/jrm/.local/packages/enaml-native-cli/python-for-android", 
+        "arches": [
+            "x86", 
+            "armeabi-v7a"
+        ], 
+        "dependencies": {
+            "python2crystax": "", 
+            "enaml-native": "",
+            "enaml-native-charts": "",
+            "numpy":"",
+            "tornado":"",
+            "singledispatch":"",
+            "backports_abc":""
+        }, 
+        "excluded": [], 
+        "sdk": "/home/jrm/Android/Sdk"
+    }
+}
