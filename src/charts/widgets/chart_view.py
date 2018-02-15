@@ -114,8 +114,8 @@ class ChartView(ViewGroup):
     """ ChartView displays different types of charts """
 
     #: Expand by default
-    layout_height = set_default("match_parent")
-    layout_width = set_default("match_parent")
+    height = set_default("match_parent")
+    width = set_default("match_parent")
 
     #: Description text at the bottom right corner
     description = d_(Unicode())

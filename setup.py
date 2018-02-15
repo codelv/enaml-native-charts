@@ -40,7 +40,7 @@ def find_data_files(dest, *folders):
 
 setup(
     name="enaml-native-charts",
-    version="1.0.1",
+    version="1.0.3",
     author="jrm",
     author_email="",
     license='MIT',
@@ -49,7 +49,7 @@ setup(
     long_description=open("README.md").read(),
     py_modules=['enamlnative_charts'],
     data_files=find_data_files("enaml-native-charts", 'android', 'ios', 'src'),
-    install_requires=['enaml-native-cli'],
+    install_requires=['enaml-native>=3.0.0'],
     entry_points={
         'p4a_recipe': [
             'enaml_native_charts = enamlnative_charts:get_recipe'
