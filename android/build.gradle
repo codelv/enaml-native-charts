@@ -1,13 +1,12 @@
 apply plugin: 'com.android.library'
-apply plugin: 'me.tatarka.retrolambda'
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 27
     buildToolsVersion '26.0.2'
 
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 25
+        targetSdkVersion 27
         versionCode 12
         versionName "1.12"
         vectorDrawables.useSupportLibrary = true
@@ -27,7 +26,7 @@ android {
 }
 
 dependencies {
-    compile project(':enaml-native')
-    compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
+    api project(':enaml-native')
+    api 'com.github.PhilJay:MPAndroidChart:v3.0.2'
 }
 

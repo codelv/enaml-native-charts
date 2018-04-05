@@ -9,7 +9,7 @@ def main():
     from enamlnative.android.app import AndroidApplication
     app = AndroidApplication()
     #app.debug = True #: Uncomment to debug the bridge
-    app.dev = 'server' #: Uncomment to enable reloading
+    app.dev = '192.168.41.139' #: Uncomment to enable reloading
     app.reload_view = reload_view
     app.deferred_call(load_view, app)
     app.start()

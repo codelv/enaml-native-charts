@@ -1,0 +1,18 @@
+package:
+  name: enaml-native-charts
+  version: 1.0.3
+
+requirements:
+  build:
+    - python
+
+  run:
+    - enaml-native
+
+build:
+  number: 1
+  noarch: generic
+
+about:
+  home: http://github.com/codelv/enaml-native-charts
+  license: MIT
